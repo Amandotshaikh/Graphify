@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Graphify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center h-screen bg-gradient-to-r from-purple-900 to-blue-900"> 
+    <!-- Graphify Logo -->
+    <div class="absolute top-4 left-4 flex items-center space-x-2">
+        <img src="/static/logo.jpg.png"class="h-12 w-12">
+        <span class="text-white text-xl font-semibold">Graphify</span>
+    </div>
+
+    <!-- Welcome Message -->
+    <div class="absolute top-20 text-center w-full">
+        <h1 class="text-white text-3xl font-bold">Welcome to <span class="text-purple-300">Graphify</span></h1>
+        <p class="text-gray-300 text-sm">Talk to your data, quickly gain insights.</p>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="bg-purple-900 p-8 rounded-lg shadow-2xl w-full max-w-md">
+        <h2 class="text-xl font-semibold text-center text-white mb-6">Register Form</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="p-3 mb-3 text-white rounded {% if category == 'success' %} bg-green-500 {% elif category == 'error' %} bg-red-500 {% else %} bg-gray-500 {% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-4">
+                <label class="block text-gray-300 text-sm font-semibold mb-2">Name</label>
+                {{ form.name(class="w-full p-2 bg-purple-800 text-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-300", placeholder="Enter your name") }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-300 text-sm font-semibold mb-2">Email</label>
+                {{ form.email(class="w-full p-2 bg-purple-800 text-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-300", placeholder="Enter your email") }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-300 text-sm font-semibold mb-2">Password</label>
+                {{ form.password(class="w-full p-2 bg-purple-800 text-white border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder-gray-300", placeholder="Enter your password") }}
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
+                Register
+            </button>
+        </form>
+
+        <p class="text-sm text-gray-300 mt-4 text-center">
+            Already have an account? 
+            <a href="{{ url_for('auth.login') }}" class="text-purple-300 font-semibold hover:underline">Login here</a>.
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Graph - Graphify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-900 to-blue-900 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto p-6 text-white">
+
+        <!-- Header -->
+        <div class="absolute top-4 left-4 flex items-center space-x-2">
+            <img src="/static/logo.jpg.png"class="h-12 w-12">
+            <span class="text-white text-xl font-semibold">Graphify</span>
+        </div>
+
+        <h2 class="text-center text-3xl font-semibold">Upload a File & Select Graph Type</h2>
+
+        <!-- Form for File Upload & Graph Selection -->
+        <form action="{{ url_for('upload.upload_file') }}" method="POST" enctype="multipart/form-data" class="mt-6 text-center">
+            <div class="mb-4">
+                <label class="text-lg">Choose file (CSV, XLSX, TXT):</label>
+                <input type="file" id="file-upload" name="file" class="hidden" required>
+                <label for="file-upload" id="file-label" class="bg-white text-black px-4 py-2 rounded cursor-pointer">Choose File</label>
+                <span id="file-name" class="text-sm text-gray-300">No file chosen</span>
+            </div>
+            <div class="mb-6">
+                <label class="text-lg">Select Graph Type:</label>
+                <select name="graph_type" id="graph-type" class="bg-white text-black p-2 rounded ml-2" required>
+                    <option value="">Select Graph</option>
+                    <option value="line">Line Chart</option>
+                    <option value="pie">Pie Chart</option>
+                    <option value="bar">Bar Chart</option>
+                    <option value="scatter">Scatter Plot</option>
+                    <option value="histogram">Histogram</option>
+                    <option value="box">Box Plot</option>
+                </select>
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Generate Graph</button>
+        </form>
+
+        <!-- Description Cards with Icons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+            <div class="bg-purple-800 p-4 rounded shadow-lg flex flex-col items-center">
+                <img src="/static/images/line graph.png" class="h-16 w-16 rounded-full mb-2">
+                <h3 class="text-xl font-bold">Line Graph</h3>
+                <p>A line graph shows trends over time by connecting data points with lines.</p>
+            </div>
+            <div class="bg-purple-800 p-4 rounded shadow-lg flex flex-col items-center">
+                <img src="/static/images/pie chart.png" class="h-16 w-16 rounded-full mb-2">
+                <h3 class="text-xl font-bold">Pie Chart</h3>
+                <p>A pie chart represents data as slices of a circle.</p>
+            </div>
+            <div class="bg-purple-800 p-4 rounded shadow-lg flex flex-col items-center">
+                <img src="/static/images/bar graph.png" class="h-16 w-16 rounded-full mb-2">
+                <h3 class="text-xl font-bold">Bar Graph</h3>
+                <p>A bar graph displays data using rectangular bars for comparison.</p>
+            </div>
+            <div class="bg-purple-800 p-4 rounded shadow-lg flex flex-col items-center">
+                <img src="/static/images/scatter plot.png" class="h-16 w-16 rounded-full mb-2">
+                <h3 class="text-xl font-bold">Scatter Plot</h3>
+                <p>A scatter plot displays data points to show relationships.</p>
+            </div>
+            <div class="bg-purple-800 p-4 rounded shadow-lg flex flex-col items-center">
+                <img src="/static/images/histogram.png" class="h-16 w-16 rounded-full mb-2">
+                <h3 class="text-xl font-bold">Histogram</h3>
+                <p>A histogram shows numerical data distribution using bins.</p>
+            </div>
+            <div class="bg-purple-800 p-4 rounded shadow-lg flex flex-col items-center">
+                <img src="/static/images/box plot.png" class="h-16 w-16 rounded-full mb-2">
+                <h3 class="text-xl font-bold">Box Plot</h3>
+                <p>A box plot displays data distribution using quartiles and outliers.</p>
+            </div>
+        </div>
+
+        <p class="text-center mt-6 text-gray-300">"Upload your dataset in CSV, XLSX, or TXT file, choose your preferred graph and explore powerful visualizations tailored to your needs."</p>
+    </div>
+
+    <script>
+        document.getElementById('file-upload').addEventListener('change', function () {
+            const fileName = this.files[0] ? this.files[0].name : "No file chosen";
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
+</body>
+</html>
